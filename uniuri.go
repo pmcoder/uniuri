@@ -31,6 +31,20 @@ const (
 // Standard characters allowed in uniuri string.
 var StdChars = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
 
+// Attempt at removing characters that casuse ambiguity in serif font
+// Better to have a built in option over pulling chars on each invocation
+// No consideration has been given to any reduction in security or randomness
+var ReadableChars = []byte("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789")
+
+func NewReadable() string{
+	return NewLenChars(StdLen, ReadableChars)
+}
+
+func NewReadableLen(length int) string{
+	return NewLenChars(length, ReadableChars)
+}
+
+
 // New returns a new random string of the standard length, consisting of
 // standard characters.
 func New() string {
